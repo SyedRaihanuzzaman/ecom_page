@@ -58,7 +58,36 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text("৳ ${products[index].price}"),
-                              Icon(Icons.shopping_cart),
+                              InkWell(
+                                onTap: () {
+                                  try {
+                                    cartListData.firstWhere(
+                                      (element) =>
+                                          element.id == products[index].id,
+                                    );
+
+                                    var snackbar = SnackBar(
+                                      backgroundColor: Colors.cyan,
+                                      duration: Duration(seconds: 2),
+                                      content: Text(
+                                        "Data Already Added",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    );
+
+                                    ScaffoldMessenger.of(
+                                      context,
+                                    ).showSnackBar(snackbar);
+                                  } catch (e) {
+                                    cartListData.add(products[index]);
+                                    setState(() {});
+                                  }
+                                },
+                                child: Icon(Icons.shopping_cart),
+                              ),
                             ],
                           ),
 
