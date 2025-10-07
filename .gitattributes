@@ -1,5 +1,18 @@
-# Tell GitHub Linguist to ignore platform files and detect Dart properly
-android/* linguist-vendored
-ios/* linguist-vendored
-build/* linguist-vendored
-test/* linguist-vendored
+# --- Force GitHub Linguist to count only Dart code ---
+
+# Count all Dart files in lib/ as main code
+lib/** linguist-detectable=true
+
+# Ignore platform and generated files
+android/** linguist-vendored
+ios/** linguist-vendored
+linux/** linguist-vendored
+macos/** linguist-vendored
+windows/** linguist-vendored
+web/** linguist-vendored
+build/** linguist-vendored
+test/** linguist-vendored
+
+# Optionally mark any assets folder as vendored
+assets/** linguist-vendored
+
