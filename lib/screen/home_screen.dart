@@ -1,3 +1,4 @@
+import 'package:ecom_page/model/ecom_model.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -8,8 +9,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<EcomModel> cartListData = [];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Total Product is ${cartListData.length}"),
+        backgroundColor: Colors.cyan,
+      ),
+    );
   }
 }
