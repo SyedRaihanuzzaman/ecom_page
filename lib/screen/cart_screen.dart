@@ -11,6 +11,19 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  var netTotal;
+  void getTotal() {
+    netTotal = widget.cartDataList!
+        .map((item) => item.price!.toInt() * item.quantity)
+        .reduce((value, element) => value + element);
+  }
+
+  @override
+  void initState() {
+    getTotal();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,17 +53,39 @@ class _CartScreenState extends State<CartScreen> {
 
                         Text("${widget.cartDataList![index].name}"),
                         Text("${widget.cartDataList![index].price}"),
-                        Icon(Icons.remove),
+
+                        InkWell(
+                          onTap: () {
+                            widget.cartDataList![index].quantity--;
+                            getTotal();
+                            setState(() {});
+                          },
+                          child: Icon(Icons.remove),
+                        ),
 
                         Text("${widget.cartDataList![index].quantity}"),
 
-                        Icon(Icons.add),
-                        Icon(Icons.delete),
+                        InkWell(
+                          onTap: () {
+                            widget.cartDataList![index].quantity++;
+                            getTotal();
+                            setState(() {});
+                          },
+                          child: Icon(Icons.add),
+                        ),
+
+                        InkWell(onTap: () {}, child: Icon(Icons.delete)),
                       ],
                     ),
                   );
                 },
               ),
+            ),
+
+            Container(
+              width: double.infinity,
+              color: Colors.cyan,
+              child: Center(child: Text("Total Value is $netTotal")),
             ),
           ],
         ),
