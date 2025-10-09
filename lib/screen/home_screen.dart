@@ -1,4 +1,5 @@
 import 'package:ecom_page/model/ecom_model.dart';
+import 'package:ecom_page/screen/cart_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -104,7 +105,15 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               MaterialButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          CartScreen(cartDataList: cartListData),
+                    ),
+                  );
+                },
                 minWidth: double.infinity,
                 color: Colors.cyan,
                 child: Text("Go to Next Page"),
